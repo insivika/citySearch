@@ -26,7 +26,7 @@ app.use(bodyparser.json());
 
 app.set('port', process.env.PORT || 3001);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 // Enable CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -62,6 +62,12 @@ app.get('/search', (req, res) => {
     });
 });
 
+app.get('/v2', (req, res) => {
+  res.sendFile('template2.html', {
+    root: path.join( __dirname, 'views')
+  })
+})
+
 app.listen(app.get('port'), () => {
-  console.log('Express server listening on por ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 })
